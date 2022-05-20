@@ -22,10 +22,13 @@ public class TaxiFareRequestInterceptor extends HandlerInterceptorAdapter {
         HttpServletRequest requestCacheWrapperObject = null;
         try {
             // Uncomment to produce the stream closed issue
-            // postData = RequestLoggingUtil.getStringFromInputStream(request.getInputStream());
+            //postData = RequestLoggingUtil.getStringFromInputStream(request.getInputStream());
 
             // To overcome request stream closed issue
-            requestCacheWrapperObject = new ContentCachingRequestWrapper(request);
+            if(!(request instanceof ContentCachingRequestWrapper)) {
+                requestCacheWrapperObject = new ContentCachingRequestWrapper(request);
+            }
+
             requestCacheWrapperObject.getParameterMap();
         } catch (Exception exception) {
             exception.printStackTrace();
