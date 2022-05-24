@@ -12,6 +12,7 @@ import org.springframework.web.util.ContentCachingRequestWrapper;
 import com.baeldung.web.log.util.RequestLoggingUtil;
 
 import java.text.SimpleDateFormat;
+import java.util.Map;
 
 @Component
 public class TaxiFareRequestInterceptor extends HandlerInterceptorAdapter {
@@ -24,6 +25,8 @@ public class TaxiFareRequestInterceptor extends HandlerInterceptorAdapter {
         HttpServletRequest requestCacheWrapperObject = null;
         long startTime = System.currentTimeMillis();
         request.setAttribute("startTime", startTime);
+        String url = request.getRequestURI();
+
 
         try {
             // Uncomment to produce the stream closed issue
@@ -33,6 +36,7 @@ public class TaxiFareRequestInterceptor extends HandlerInterceptorAdapter {
             if(!(request instanceof ContentCachingRequestWrapper)) {
                 StringBuilder sb = new StringBuilder(1000);
                 sb.append("-----------------------开始计时:").append(new SimpleDateFormat("hh:mm:ss.SSS").format(startTime)).append("-------------------------------------\n");
+                sb.append(url);
                 LOGGER.debug(sb.toString());
                 requestCacheWrapperObject = new ContentCachingRequestWrapper(request);
             }
