@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 
-@ComponentScan("com.baeldung.web.log")
+@ComponentScan("com.baeldung.web.log2")
 @PropertySource("application-log.properties")
 @SpringBootApplication
 public class Application {
